@@ -2432,6 +2432,12 @@ function setupInputListeners() {
       event.preventDefault();
       $(this).onlySiblingWithClass('active');
     });
+
+    // custom logo file selector
+    $('#custom-emblem-link').on('click', function() {
+      $('#custom-emblem-input').trigger('click');
+    });
+
   }; // FB_CTF.init()
 })(window.FB_CTF = {});
 
