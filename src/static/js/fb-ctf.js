@@ -2434,8 +2434,22 @@ function setupInputListeners() {
     });
 
     // custom logo file selector
+    var $customEmblemInput = $('#custom-emblem-input');
     $('#custom-emblem-link').on('click', function() {
-      $('#custom-emblem-input').trigger('click');
+      $customEmblemInput.trigger('click');
+    });
+    // custom logo image preview
+    $customEmblemInput.change(function() {
+      var input = this;
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#custom-emblem-preview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
     });
 
   }; // FB_CTF.init()

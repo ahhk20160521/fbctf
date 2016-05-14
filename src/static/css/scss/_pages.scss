@@ -21,6 +21,24 @@
 }
 
 /* --------------------------------------------
+ * --registration
+ * -------------------------------------------- */
+
+.page--registration {
+  .custom-emblem {
+    text-align: center;
+    #custom-emblem-input {
+      display: none;
+    }
+    #custom-emblem-preview {
+      margin-top: 20px;
+      max-width: 100px;
+      max-height: 100px;
+    }
+  }
+}
+
+/* --------------------------------------------
  * --blog
  * -------------------------------------------- */
 
