@@ -282,7 +282,6 @@ class IndexController extends Controller {
     }
 
     $logos_section = await $this->genRenderLogosSelection();
-    $empty_img_src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
     return
       <main role="main" class="fb-main page--registration full-height fb-scroll">
         <header class="fb-section-header fb-container">
@@ -310,7 +309,7 @@ class IndexController extends Controller {
               </h6>
               <div class="custom-emblem">
                 <input autocomplete="off" name="custom-emblem" id="custom-emblem-input" type="file" accept="image/*"/>
-                <img id="custom-emblem-preview" src={$empty_img_src}></img>
+                <img id="custom-emblem-preview" src=""></img>
               </div>
               <div class="emblem-carousel">{$logos_section}</div>
             </div>

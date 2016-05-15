@@ -109,6 +109,31 @@ class Logo extends Model {
     return $logos;
   }
 
+  // Create a logo and return the created logo id.
+  public static async function genCreate(
+    string $name,
+    string $logo
+  ): Awaitable<int> {
+    $db = await self::genDb();
+
+    // Create logo
+    await $db->queryf(
+      'INSERT INTO logos (name, logo) VALUES (%s, %s)',
+      $name,
+      $logo
+    );
+
+    // Return newly created logo_id
+    $result = await $db->queryf(
+      'SELECT id FROM logos WHERE name = %s AND logo = %s LIMIT 1',
+      $name,
+      $logo
+    );
+
+    invariant($result->numRows() === 1, 'Expected exactly one result');
+    return intval($result->mapRows()[0]['id']);
+  }
+
   private static function logoFromRow(Map<string, string> $row): Logo {
     return new Logo(
       intval(must_have_idx($row, 'id')),

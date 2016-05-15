@@ -11,9 +11,11 @@ class IndexAjaxController extends AjaxController {
         'logo'        => array(
           'filter'      => FILTER_VALIDATE_REGEXP,
           'options'     => array(
-            'regexp'      => '/^[\w-]+$/'
+            'regexp'      => '/^[\w-+=\/]+$/'
           ),
         ),
+        'isCustomLogo' => FILTER_VALIDATE_BOOLEAN,
+        'logoType'     => FILTER_UNSAFE_RAW,
         'token'        => array(
           'filter'      => FILTER_VALIDATE_REGEXP,
           'options'     => array(
@@ -55,6 +57,8 @@ class IndexAjaxController extends AjaxController {
         must_have_string($params, 'password'),
         strval(must_have_idx($params, 'token')),
         must_have_string($params, 'logo'),
+        must_have_bool($params, 'isCustomLogo'),
+        strval(must_have_idx($params, 'logoType')),
         false,
         array(),
         array(),
@@ -73,6 +77,8 @@ class IndexAjaxController extends AjaxController {
         must_have_string($params, 'password'),
         strval(must_have_idx($params, 'token')),
         must_have_string($params, 'logo'),
+        must_have_bool($params, 'isCustomLogo'),
+        strval(must_have_idx($params, 'logoType')),
         true,
         $names,
         $emails,
@@ -111,6 +117,8 @@ class IndexAjaxController extends AjaxController {
     string $password,
     ?string $token,
     string $logo,
+    bool $is_custom_logo,
+    ?string $logo_type,
     bool $register_names,
     array<string> $names,
     array<string> $emails,
@@ -133,9 +141,25 @@ class IndexAjaxController extends AjaxController {
 
     // Check logo
     $final_logo = $logo;
-    $check_exists = await Logo::genCheckExists($final_logo);
-    if (!$check_exists) {
-      $final_logo = await Logo::genRandomLogo();
+
+    if ($is_custom_logo) {
+      $logo_data = str_replace(' ', '+', $final_logo);
+      $logo_data_unbase64ed = base64_decode($logo_data);
+
+      $name = 'custom-'.time();
+      $filename = $name.'.'.$logo_type;
+      // '..' is separated for DB storage
+      $full_path = '/static/img/customlogo/'.$filename;
+      $full_filename = dirname(__FILE__).'/../..'.$full_path;
+      file_put_contents($full_filename, $logo_data_unbase64ed);
+
+      $custom_logo_id = await Logo::genCreate($name, $full_path);
+      $final_logo = $filename;
+    } else {
+      $check_exists = await Logo::genCheckExists($final_logo);
+      if (!$check_exists) {
+        $final_logo = await Logo::genRandomLogo();
+      }
     }
 
     // Check if team name is not empty or just spaces
