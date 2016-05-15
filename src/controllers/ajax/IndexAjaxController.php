@@ -154,12 +154,12 @@ class IndexAjaxController extends AjaxController {
       file_put_contents($full_filename, $logo_data_unbase64ed);
 
       $custom_logo_id = await Logo::genCreate($name, $full_path);
-      $final_logo = $filename;
-    } else {
-      $check_exists = await Logo::genCheckExists($final_logo);
-      if (!$check_exists) {
-        $final_logo = await Logo::genRandomLogo();
-      }
+      $final_logo = $name;
+    }
+
+    $check_exists = await Logo::genCheckExists($final_logo);
+    if (!$check_exists) {
+      $final_logo = await Logo::genRandomLogo();
     }
 
     // Check if team name is not empty or just spaces
