@@ -65,12 +65,23 @@ function activateTeams() {
       $('.team-name', $modal).text(team);
       // team badge
       if (teamData.logo.custom) {
-        // css styles are applied here since 'svg' has a 'use' child, and css can't select parents based on children
-        $('svg.icon--badge', $modal).css('display', 'none').children('use').attr('xlink:href', "");
-        $('img.icon--badge', $modal).css('display', '').attr('src', teamData.logo.path);
+        // css styles are applied here since 'svg' has a 'use' child, and
+        // css can't select parents based on children
+        $('svg.icon--badge', $modal)
+            .css('display', 'none')
+            .children('use')
+            .attr('xlink:href', "");
+        $('img.icon--badge', $modal)
+            .css('display', '')
+            .attr('src', teamData.logo.path);
       } else {
-        $('svg.icon--badge', $modal).css('display', '').children('use').attr('xlink:href', "#icon--badge-" + teamData.logo.name);
-        $('img.icon--badge', $modal).css('display', 'none').attr('src', "");
+        $('svg.icon--badge', $modal)
+            .css('display', '')
+            .children('use')
+            .attr('xlink:href', "#icon--badge-" + teamData.logo.name);
+        $('img.icon--badge', $modal)
+            .css('display', 'none')
+            .attr('src', "");
       }
       // team members
       $.each(teamData.team_members, function() {
@@ -2202,12 +2213,23 @@ function setupInputListeners() {
           // team badge
           // TODO this if/else is duplicated further up in this file. Un-duplicate.
           if (teamData.logo.custom) {
-            // css styles are applied here since 'svg' has a 'use' child, and css can't select parents based on children
-            $('svg.icon--badge', $modal).css('display', 'none').children('use').attr('xlink:href', "");
-            $('img.icon--badge', $modal).css('display', '').attr('src', teamData.logo.path);
+            // css styles are applied here since 'svg' has a 'use' child, and
+            // css can't select parents based on children
+            $('svg.icon--badge', $modal)
+                .css('display', 'none')
+                .children('use')
+                .attr('xlink:href', "");
+            $('img.icon--badge', $modal)
+                .css('display', '')
+                .attr('src', teamData.logo.path);
           } else {
-            $('svg.icon--badge', $modal).css('display', '').children('use').attr('xlink:href', "#icon--badge-" + teamData.logo.name);
-            $('img.icon--badge', $modal).css('display', 'none').attr('src', "");
+            $('svg.icon--badge', $modal)
+                .css('display', '')
+                .children('use')
+                .attr('xlink:href', "#icon--badge-" + teamData.logo.name);
+            $('img.icon--badge', $modal)
+                .css('display', 'none')
+                .attr('src', "");
           }
           // team members
           $.each(teamData.team_members, function() {

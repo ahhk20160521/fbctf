@@ -64,9 +64,9 @@ function verifyTeamLogo() {
       var filetypeBeginIdx = customLogoSrc.indexOf('/') + 1;
       var filetypeEndIdx = customLogoSrc.indexOf(';');
       var filetype = customLogoSrc.substring(filetypeBeginIdx, filetypeEndIdx);
-      
+
       var base64 = customLogoSrc.substring(customLogoSrc.indexOf(',') + 1);
-      
+
       return {
         isCustom: true,
         type: filetype,

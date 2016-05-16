@@ -82,13 +82,13 @@ class Logo extends Model {
 
   // Logo model by name
   public static async function genLogo(
-    string $name
+    string $name,
   ): Awaitable<Logo> {
     $db = await self::genDb();
 
     $result = await $db->queryf(
       'SELECT * FROM logos WHERE name = %s',
-      $name
+      $name,
     );
 
     invariant($result->numRows() === 1, 'Expected exactly one result');
@@ -133,7 +133,7 @@ class Logo extends Model {
   // Create a logo and return the created logo id.
   public static async function genCreate(
     string $name,
-    string $logo
+    string $logo,
   ): Awaitable<int> {
     $db = await self::genDb();
 
@@ -141,14 +141,14 @@ class Logo extends Model {
     await $db->queryf(
       'INSERT INTO logos (name, logo) VALUES (%s, %s)',
       $name,
-      $logo
+      $logo,
     );
 
     // Return newly created logo_id
     $result = await $db->queryf(
       'SELECT id FROM logos WHERE name = %s AND logo = %s LIMIT 1',
       $name,
-      $logo
+      $logo,
     );
 
     invariant($result->numRows() === 1, 'Expected exactly one result');
