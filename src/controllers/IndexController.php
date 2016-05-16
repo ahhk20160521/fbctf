@@ -259,6 +259,13 @@ class IndexController extends Controller {
           </fieldset>
           <div class="fb-choose-emblem">
             <h6>Choose an Emblem</h6>
+            <h6>
+              <a href="#" id="custom-emblem-link">or upload your own</a>
+            </h6>
+            <div class="custom-emblem">
+              <input autocomplete="off" name="custom-emblem" id="custom-emblem-input" type="file" accept="image/*"/>
+              <img id="custom-emblem-preview" src=""></img>
+            </div>
             <div class="emblem-carousel">{$logos_section}</div>
           </div>
           <div class="form-el--actions fb-container container--small">
