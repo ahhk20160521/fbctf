@@ -56,6 +56,11 @@ class Team extends Model {
     return $this->logo;
   }
 
+  public async function getLogoModel(): Awaitable<Logo> {
+    $logo = await Logo::genLogo($this->logo);
+    return $logo;
+  }
+
   public async function getLogoPath(): Awaitable<string> {
     $db = await self::genDb();
     $result = await $db->queryf(

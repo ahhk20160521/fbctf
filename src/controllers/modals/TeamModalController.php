@@ -13,6 +13,7 @@ class TeamModalController extends ModalController {
         <div class="fb-column-container fb-modal-main">
           <div class="col col-1-4 badge-column">
             <svg class="icon--badge"><use href=""></use></svg>
+            <img class="icon--badge" src=""></img>
           </div>
           <div class="col col-1-4">
             <header><span class="highlighted">team_members</span></header>
