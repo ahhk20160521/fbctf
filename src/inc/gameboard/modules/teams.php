@@ -16,14 +16,20 @@ class TeamModuleController {
     $gameboard = await Configuration::gen('gameboard');
     if ($gameboard->getValue() === '1') {
       foreach ($leaderboard as $leader) {
-        $iconbadge = '#icon--badge-' . $leader->getLogo();
+        $logo_name = $leader->getLogo();
+        if (strpos($logo_name, "custom") === 0) {
+          $logo_path = await $leader->getLogoPath();
+          $image = <img class="icon--badge" src={$logo_path}></img>;
+        } else {
+          $iconbadge = '#icon--badge-' . $logo_name;
+          $image = <svg class="icon--badge">
+                     <use href={$iconbadge}/>
+                   </svg>;
+        }
         $list->appendChild(
           <li>
             <a href="#" data-team={$leader->getName()}>
-              <svg class="icon--badge">
-                <use href={$iconbadge}/>
-
-              </svg>
+              {$image}
             </a>
           </li>
         );
