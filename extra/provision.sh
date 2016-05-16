@@ -95,6 +95,9 @@ import_empty_db "root" "$P_ROOT" "$DB" "$CTF_PATH" "$MODE"
 sudo chmod 777 "$CTF_PATH/src/data/attachments"
 sudo chmod 777 "$CTF_PATH/src/data/attachments/deleted"
 
+# Make custom logos folder world writable
+sudo chmod 777 "$CTF_PATH/src/static/img/customlogo"
+
 log 'fbctf deployment is complete! Ready in https://10.10.10.5'
 
 exit 0

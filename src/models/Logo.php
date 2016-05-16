@@ -6,6 +6,7 @@ class Logo extends Model {
     private int $used,
     private int $enabled,
     private int $protected,
+    private int $custom,
     private string $name,
     private string $logo
   ) {
@@ -33,6 +34,10 @@ class Logo extends Model {
 
   public function getProtected(): bool {
     return $this->protected === 1;
+  }
+
+  public function getCustom(): bool {
+    return $this->custom === 1;
   }
 
   // Check to see if the logo exists.
@@ -73,6 +78,22 @@ class Logo extends Model {
     invariant($result->numRows() === 1, 'Expected exactly one result');
 
     return $result->mapRows()[0]['name'];
+  }
+
+  // Logo model by name
+  public static async function genLogo(
+    string $name
+  ): Awaitable<Logo> {
+    $db = await self::genDb();
+
+    $result = await $db->queryf(
+      'SELECT * FROM logos WHERE name = %s',
+      $name
+    );
+
+    invariant($result->numRows() === 1, 'Expected exactly one result');
+
+    return self::logoFromRow($result->mapRows()[0]);
   }
 
   // All the logos.
@@ -140,6 +161,7 @@ class Logo extends Model {
       intval(must_have_idx($row, 'used')),
       intval(must_have_idx($row, 'enabled')),
       intval(must_have_idx($row, 'protected')),
+      intval(must_have_idx($row, 'custom')),
       must_have_idx($row, 'name'),
       must_have_idx($row, 'logo'),
     );
