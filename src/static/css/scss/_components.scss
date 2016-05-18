@@ -618,10 +618,6 @@
 
   .user-avatar {
     @include flex(0 0 80px);
-
-    .icon--badge {
-      width: 100%;
-    }
   }
 
   .player-info {
