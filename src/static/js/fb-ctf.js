@@ -2472,21 +2472,30 @@ function setupInputListeners() {
 
     // custom logo file selector
     var $customEmblemInput = $('#custom-emblem-input');
+    var $customEmblemPreview = $('#custom-emblem-preview');
+    var $customEmblemCarouselNotice = $('#custom-emblem-carousel-notice');
     $('#custom-emblem-link').on('click', function() {
       $customEmblemInput.trigger('click');
     });
-    // custom logo image preview
+    // on file input change, set image preview and emblem carousel notice
     $customEmblemInput.change(function() {
       var input = this;
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          $('#custom-emblem-preview').attr('src', e.target.result);
+          $customEmblemPreview.attr('src', e.target.result);
+          $customEmblemCarouselNotice.addClass('active');
         };
 
         reader.readAsDataURL(input.files[0]);
       }
+    });
+    // custom logo remover
+    $('#custom-emblem-clear-link').on('click', function() {
+      $customEmblemInput.val(''); // changing file input value doesn't work on IE10/11
+      $customEmblemPreview.attr('src', '');
+      $customEmblemCarouselNotice.removeClass('active');
     });
 
   }; // FB_CTF.init()

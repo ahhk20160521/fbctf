@@ -266,7 +266,16 @@ class IndexController extends Controller {
               <input autocomplete="off" name="custom-emblem" id="custom-emblem-input" type="file" accept="image/*"/>
               <img id="custom-emblem-preview" src=""></img>
             </div>
-            <div class="emblem-carousel">{$logos_section}</div>
+            <div class="emblem-carousel">
+              <div id="custom-emblem-carousel-notice">
+                <div class="center-wrapper">
+                  <h6>
+                    <a href="#" id="custom-emblem-clear-link">Clear your custom emblem to use a default emblem</a>
+                  </h6>
+                </div>
+              </div>
+              {$logos_section}
+            </div>
           </div>
           <div class="form-el--actions fb-container container--small">
             <p><button id="register_button" class="fb-cta cta--yellow" type="button">Sign Up</button></p>
@@ -318,7 +327,16 @@ class IndexController extends Controller {
                 <input autocomplete="off" name="custom-emblem" id="custom-emblem-input" type="file" accept="image/*"/>
                 <img id="custom-emblem-preview" src=""></img>
               </div>
-              <div class="emblem-carousel">{$logos_section}</div>
+              <div class="emblem-carousel">
+                <div id="custom-emblem-carousel-notice">
+                  <div class="center-wrapper">
+                    <h6>
+                      <a href="#" id="custom-emblem-clear-link">Clear your custom emblem to use a default emblem</a>
+                    </h6>
+                  </div>
+                </div>
+                {$logos_section}
+              </div>
             </div>
             <div class="form-el--actions fb-container container--small">
               <p><button id="register_button" class="fb-cta cta--yellow" type="button">Sign Up</button></p>
