@@ -3,6 +3,23 @@
 class TutorialModalController extends ModalController {
   private function getStep(string $step): (string, string, string, ?:xhp, :xhp) {
     switch ($step) {
+      case 'about-start':
+        $header =
+          <h1 class="fb-glitch" data-text="Humanity Advanced Crowd Sourcing (HACS) Initiative">Humanity Advanced Crowd Sourcing (HACS) Initiative</h1>;
+        $content =
+          <div class="main-text">
+            <p class="typed-text">A Web platform to help locals and heros optimize emergency services using hyper geolocal real time voting and world class matching algorithms.</p>
+          </div>;
+        return tuple($step, 'About', 'game-clock', null, $content);
+      case 'about-summary':
+          $content =
+            <main role="main" class="fb-main page--landing row-fluid no-shrink center-vertically fb-img-glitch">
+              <div class="fb-container fb-centered-main">
+                <h1 class="fb-glitch" data-text="Humanity Advanced Crowd Sourcing (HACS) Initiative">Humanity Advanced Crowd Sourcing (HACS) Initiative</h1>
+                <p class="typed-text">A Web platform to help locals and heros optimize emergency services using hyper geolocal real time voting and world class matching algorithms.</p>
+              </div>
+            </main>;
+          return tuple($step, 'About', 'game-clock', null, $content);
       case 'tool-bars':
         $content =
           <div class="main-text">
@@ -87,7 +104,7 @@ class TutorialModalController extends ModalController {
       <div class="fb-modal-content fb-tutorial" data-tutorial-step={$step}>
         {$header}
         <div class="modal-title">
-          <h4>tutorial_<span class="highlighted">{$name}</span></h4>
+          <h4>about_<span class="highlighted">{$name}</span></h4>
         </div>
         <div class="tutorial-content">
           {$content}
@@ -99,7 +116,7 @@ class TutorialModalController extends ModalController {
           </div>
         </div>
         <div class="tutorial-skip">
-          <a href="#" class="fb-cta js-close-tutorial">Skip to play</a>
+          <a href="#" class="fb-cta js-close-tutorial">Skip to map</a>
         </div>
       </div>;
   }

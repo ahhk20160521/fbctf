@@ -46,11 +46,11 @@ class IndexController extends Controller {
       <div class="fb-row-container full-height fb-scroll">
         <main role="main" class="fb-main page--landing row-fluid no-shrink center-vertically fb-img-glitch">
           <div class="fb-container fb-centered-main">
-            <h1 class="fb-glitch" data-text="Conquer the World">Conquer the world</h1>
-            <p class="typed-text">Welcome to the Facebook Capture the Flag Competition. By clicking "Play," you will be entered into the official CTF challenge. Good luck in your conquest.</p>
+            <h1 class="fb-glitch" data-text="Humanity Advanced Crowd Sourcing (HACS) Initiative">Humanity Advanced Crowd Sourcing (HACS) Initiative</h1>
+            <p class="typed-text">A Web platform to help locals and heros optimize emergency services using hyper geolocal real time voting and world class matching algorithms.</p>
 
             <div class="fb-actionable">
-              <a href="/index.php?page=countdown" class="fb-cta cta--yellow">Play</a>
+              <a href="/index.php?page=countdown" class="fb-cta cta--yellow">Save The World</a>
             </div>
           </div>
         </main>

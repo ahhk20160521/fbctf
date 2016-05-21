@@ -1706,7 +1706,8 @@ function setupInputListeners() {
         event.preventDefault();
       }
 
-      var firstTutorial = 'tool-bars',
+      //var firstTutorial = 'tool-bars',
+      var firstTutorial = 'about-start',
           tutorialSteps = 8,
           currStepIndex = 1;
 
@@ -1760,6 +1761,81 @@ function setupInputListeners() {
      *      prevent the default action
      */
     function closeTutorial(event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      $body.removeAttr('class').removeData('tutorial');
+      Modal.close();
+    }
+
+    /* --------------------------------------------
+     * --tutorial (AboutSummary)
+     * -------------------------------------------- */
+
+    /**
+     * init the tutorial modals
+     */
+    function initAboutSummary(event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      //var firstTutorial = 'tool-bars',
+      var firstTutorial = 'about-summary',
+          tutorialSteps = 8,
+          currStepIndex = 1;
+
+      var tutorialPath = 'p=tutorial&modal=';
+      Modal.load(tutorialPath + firstTutorial, 'tutorial--' + firstTutorial, function() {
+        // we're done loading stuff, so remove the laoding class
+        loadOut();
+        buildAboutSummary();
+        // enable the "skip tutorial" button
+        $('#fb-main-content').on('click', '.fb-tutorial .js-close-tutorial', closeAboutSummary);
+        // enable the "next tutorial" button
+        $('#fb-main-content').on('click', 'a[data-next-tutorial]', function(event) {
+          event.preventDefault();
+          var next = $(this).data('nextTutorial');
+
+          if (next) {
+            var loadPath = 'index.php?' + tutorialPath + next;
+            currStepIndex++;
+            Utils.loadComponent('#fb-modal', loadPath, buildTutorial);
+          } else {
+            closeAboutSummary();
+          }
+        });
+      });
+
+      /**
+       * things to do after the tutorial step gets loaded
+       */
+      function buildAboutSummary() {
+        var $tutorial = $('.fb-tutorial'),
+            $progressBar = $('.tutorial-progress', $tutorial),
+            currStep = $tutorial.data('tutorialStep');
+
+        // build the tutorial progress bar
+        for (var i = 0; i < tutorialSteps; i++) {
+          var markup = i < currStepIndex ? '<li class="step-filled" />' : '<li />';
+          $progressBar.append(markup);
+        }
+        $body.removeClass(function() {
+          var stepName = $(this).data('tutorial');
+          return 'tutorial-step--' + stepName;
+        }).data('tutorial', currStep).addClass('tutorial-active tutorial-step--' + currStep);
+      }
+    }
+
+    /**
+     * close the tutorial
+     *
+     * @param event (object)
+     *   - if this function is called from an event listener,
+     *      prevent the default action
+     */
+    function closeAboutSummary(event) {
       if (event) {
         event.preventDefault();
       }
@@ -2418,6 +2494,11 @@ function setupInputListeners() {
     $('.fb-init-tutorial').on('click', function(event) {
       event.preventDefault();
       FB_CTF.gameboard.initTutorial();
+    });
+
+    $('.fb-init-about-summary').on('click', function(event) {
+      event.preventDefault();
+      FB_CTF.gameboard.initAboutSummary();
     });
 
     // click events
