@@ -1801,7 +1801,7 @@ function setupInputListeners() {
           if (next) {
             var loadPath = 'index.php?' + tutorialPath + next;
             currStepIndex++;
-            Utils.loadComponent('#fb-modal', loadPath, buildTutorial);
+            Utils.loadComponent('#fb-modal', loadPath, buildAboutSummary);
           } else {
             closeAboutSummary();
           }
@@ -1878,6 +1878,7 @@ function setupInputListeners() {
       data: getCountryData,
       captureCountry: captureCountry,
       initTutorial: initTutorial,
+      initAboutSummary: initAboutSummary,
       toggleListView: toggleListView,
       // clos the tutorial
       closeTutorial: closeTutorial,
